@@ -14,12 +14,15 @@ Code review, feedback or additions are appreciated. Fork and submit a pull reque
 This repository includes external libraries that are not available on npm.
 
 * [chessboard.js](http://chessboardjs.com/) v0.3
+* [chess.js](https://github.com/jhlywa/chess.js) commit cd9448f3d21124c39ed197e577df1d22b197f541
 
 # Installation
 
 * `npm install`
 * `bower install`
 * `gulp copy`
+
+To run in dev mode: `gulp server`
 
 # Future Improvement
 
