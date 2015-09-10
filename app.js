@@ -31,7 +31,7 @@ app.get('/', function(req, res) {
  * When user creates a new game, create a game id and redirect for the
  * second player to join.
  */
-app.get('/new', function(req, res) {
+app.get('/game', function(req, res) {
   var gameid = uuid.v4();
   res.render('game');
 });
