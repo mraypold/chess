@@ -24,6 +24,8 @@
     "gulp-express": "^0.3.5"
   },
   "dependencies": {
-    "express": "^4.13.3"
+    "express": "^4.13.3",
+    "express-hbs": "^0.8.4",
+    "node-uuid": "^1.4.3"
   }
 }

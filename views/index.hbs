@@ -1,0 +1,24 @@
+{{!< default}}
+
+<!-- Chessboard -->
+<div class="six columns">
+  <div class="u-min-height">
+    <div id="board" style="width: 400px"></div>
+  </div>
+</div>
+
+<!-- Right of Chessboard. New game, etc... -->
+<div class="six columns">
+  <div class="left-border u-min-height">
+    <div class="center centertext">
+      <p>After creating a new game, a private link will be provided which you can send to your opponent, so that they can join the match.</p>
+      <p>Have fun!</p>
+      <button>New Game</button>
+      <br>
+    </div>
+  </div>
+</div>
+
+{{#contentFor "pageScripts"}}
+  <script src="js/indexchess.js"></script>
+{{/contentFor}}

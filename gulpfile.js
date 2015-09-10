@@ -8,7 +8,10 @@ var src = {
   skeleton: 'skeleton.css',
   normalize: 'normalize.css',
   jqueryfp: 'jquery/dist/',
-  jquery: 'jquery.js'
+  jquery: 'jquery.js',
+  views: 'views/',
+  partials: this.views + 'partials/',
+  layouts: this.views + 'layouts/'
 }
 
 var dst = {
@@ -40,9 +43,16 @@ gulp.task('server', function() {
   server.run(['app.js']);
 
   // Watch for changes
-  gulp.watch([dst.css + '*.css',
+  gulp.watch([
+    dst.css + '*.css',
     dst.img + '*.png',
-    dst.js + '.js'
+    dst.js + '*.js'
+  ], server.notify);
+
+  gulp.watch([
+    src.views + '*.hbs',
+    src.partials + '*.hbs',
+    src.layouts + '*.hbs'
   ], server.notify);
 
   gulp.watch(['app.js'], [server.run]);
