@@ -1,0 +1,17 @@
+{
+  "name": "chess",
+  "version": "0.0.0",
+  "authors": [
+    "Michael <mraypold@users.noreply.github.com>"
+  ],
+  "description": "SocketIO Chess App",
+  "keywords": [
+    "SocketIO",
+    "Chess"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "skeleton": "~2.0.4"
+  }
+}
