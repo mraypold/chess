@@ -1,5 +1,7 @@
 # Chess With SocketIO
 
+Currently under development as of September 10, 2015. SocketIO integration comming soon.
+
 # About
 
 A real-time socketio based chess game using chessboard.js.
