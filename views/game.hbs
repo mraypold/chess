@@ -16,8 +16,9 @@
         <span id="gameid">/game</span>
       </p>
       <h5>Moves</h5>
-      <code id="moves">...
-      </code>
+      <div class="move-history-box">
+        <div id="moves">Move a piece...</div>
+      </div>
       <br>
       <br>
       <a class="button" href="/game">New Game</a>
@@ -26,6 +27,7 @@
 </div>
 
 {{#contentFor "pageScripts"}}
+  <script src="/socket.io/socket.io.js"></script>
   <script src="js/chess.js"></script>
   <script src="js/socketchess.js"></script>
 {{/contentFor}}

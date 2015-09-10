@@ -1,9 +1,13 @@
 var express = require('express');
+var http = require('http');
 var path = require("path");
 var hbs = require('express-hbs');
+var io = require("socket.io");
 var uuid = require('node-uuid');
 
 var app = express();
+var server = http.createServer(app)
+var socket = io.listen(server);
 
 /**
  * Handlebars view engine configuration
@@ -36,9 +40,19 @@ app.get('/game', function(req, res) {
   res.render('game');
 });
 
-var server = app.listen(3000, function() {
-  var host = server.address().address;
-  var port = server.address().port;
+/**
+ * Server listening for incoming requests
+ */
+server.listen(3000, function() {
+  console.log('Chess app listening on port 3000');
+});
 
-  console.log('Example app listening at http://%s:%s', host, port);
+/**
+ * Handle socket connections
+ */
+socket.on('connection', function(client) {
+  console.log('socket connected!');
+  client.on('move', function(arg) {
+    console.log('move: ' + arg);
+  });
 });

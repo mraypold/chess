@@ -24,6 +24,8 @@ This repository includes external libraries that are not available on npm.
 
 To run in dev mode: `gulp server`
 
+If you run into problems installing socket.io on Windows, read [this](http://stackoverflow.com/questions/16469086/npm-cant-install-socket-io) StackOverflow thread.
+
 # Future Improvement
 
 * CSS Styling. Divs overlap when the browser window size is reduced.
