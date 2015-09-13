@@ -34,6 +34,7 @@ If you run into problems installing socket.io on Windows, read [this](http://sta
 * Move routing logic into new directory and files.
 * Prefer if chess logic was handled server side to prevent cheating.
 * Socket logic is not particularly robust. Needs to be hardened.
+* Some of the socket logic should be moved outside of the routing functions.
 
 # License
 

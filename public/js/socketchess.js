@@ -9,21 +9,38 @@ var socket = io.connect();
 
 var colors = {
   b: 'black',
-  w: 'white'
+  w: 'white',
+  white: 'w',
+  black: 'b'
 };
 
 var gameid = $('#gameid').text();
-var playercolor = colors.b;
+var playercolor = colors.w;
+var waiting = true; // waiting for player 2
 
 /**
- * Informs the client as to what color they are.
+ * Update other sockets of game properties upon connection.
  */
-socket.on('color', function(arg) {
-  playercolor = arg.color;
-
-  // TODO prevent moves of the opposite color
-
+socket.on('connect', function(arg) {
+  console.log(socket.io.engine.id);
+  if(waiting) {
+    updateBanner('Waiting for a second player');
+  };
 });
+
+/**
+ * Assign the player their color
+ */
+ socket.on('players', function(players) {
+   if(players.white === socket.io.engine.id) {
+     playercolor = colors.w;
+   } else {
+     playercolor = colors.b;
+   };
+
+   waiting = false;
+   updateBanner('White\'s turn');
+ });
 
 /**
  * Update game state in response to a move from the other socket.
@@ -106,9 +123,13 @@ var onDragStart = function(source, piece) {
   // or if it's not that side's turn
   if (game.game_over() === true ||
     (game.turn() === 'w' && piece.search(/^b/) !== -1) ||
-    (game.turn() === 'b' && piece.search(/^w/) !== -1)) {
+    (game.turn() === 'b' && piece.search(/^w/) !== -1) ||
+    waiting) {
     return false;
-  }
+  };
+
+  // Do not move piece if not player's color.
+  if(colors[piece.charAt(0)] !== playercolor) return false;
 };
 
 var onDrop = function(source, target) {

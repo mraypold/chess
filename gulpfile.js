@@ -24,7 +24,7 @@ gulp.task('copy', function() {
   // copy css
   gulp.src([
       src.bower + src.skeletonfp + src.skeleton,
-      src.bower + src.skeletonfp + src.normalize,
+      src.bower + src.skeletonfp + src.normalize
     ])
     .pipe(gulp.dest(dst.css));
   // copy javascript

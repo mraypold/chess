@@ -33,17 +33,15 @@ app.get('/', function(req, res) {
 });
 
 /**
- * When user creates a new game, create a game id, socketio room and
- * redirect to a link which both players can join.
+ * When user creates a new game, create a game id (socketio room), set the
+ * player's color and notify them.
  */
 app.get('/game', function(req, res) {
   var gameid = uuid.v4();
   var gameurl = req.headers.host + req.url + '/' + gameid;
 
-  // Socketio room will be the gameid
   socket.on('connection', function(client) {
     client.join(gameid);
-    console.log('white joined ' + gameid);
   });
 
   res.render('game', {
@@ -53,25 +51,30 @@ app.get('/game', function(req, res) {
 });
 
 /**
- * A user joins an existing game using a URL with an appended uuid
+ * A user joins an existing game using a URL with an appended uuid. Set the
+ * player color and wait for the first chess move.
  */
 app.get('/game/:gameid', function(req, res) {
-  // TODO game does not exist, create a new one
-  // TODO game does exist.
   var gameurl = req.headers.host + req.url;
+  var gameid = req.params.gameid
 
   socket.on('connection', function(client) {
-    client.join(req.params.gameid);
-    console.log('black joined ' + req.params.gameid);
+    client.join(gameid);
 
-    // Inform the first player as to what color they are.
-    client.broadcast.to(req.params.gameid).emit('color', {color:'white'});
-
+    // Once two players are connected, assign the colors.
+    var clients = socket.nsps['/'].adapter.rooms[gameid];
+    var ids = Object.keys(clients);
+    if (ids.length === 2) {
+      socket.nsps['/'].to(gameid).emit('players', {
+        white: ids[0],
+        black: ids[1]
+      });
+    };
   });
 
   res.render('game', {
     gamelink: gameurl,
-    gameid: req.params.gameid
+    gameid: gameid
   });
 });
 
@@ -81,7 +84,6 @@ app.get('/game/:gameid', function(req, res) {
 
 socket.on('connection', function(client) {
   client.on('move', function(arg) {
-    console.log(arg);
     var move = JSON.parse(arg);
     client.broadcast.to(move.gameid).emit('move', arg);
   });
