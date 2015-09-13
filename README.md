@@ -32,6 +32,8 @@ If you run into problems installing socket.io on Windows, read [this](http://sta
 
 * CSS Styling. Divs overlap when the browser window size is reduced.
 * Move routing logic into new directory and files.
+* Prefer if chess logic was handled server side to prevent cheating.
+* Socket logic is not particularly robust. Needs to be hardened.
 
 # License
 

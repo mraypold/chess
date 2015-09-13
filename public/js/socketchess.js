@@ -5,12 +5,43 @@
 var board,
   game = new Chess();
 
-var socket = io();
+var socket = io.connect();
 
 var colors = {
-  b: 'Black',
-  w: 'White'
+  b: 'black',
+  w: 'white'
 };
+
+var gameid = $('#gameid').text();
+var playercolor = colors.b;
+
+/**
+ * Informs the client as to what color they are.
+ */
+socket.on('color', function(arg) {
+  playercolor = arg.color;
+
+  // TODO prevent moves of the opposite color
+
+});
+
+/**
+ * Update game state in response to a move from the other socket.
+ */
+socket.on('move', function(arg) {
+  var obj = JSON.parse(arg);
+
+  var movement = {
+    from: obj.from,
+    to: obj.to,
+    promotion: 'q'
+  };
+
+  var move = game.move(movement);
+  board.position(game.fen());
+  updateMoves();
+  playerHelper();
+});
 
 /**
  * Prints a message at the top of the webpage
@@ -95,6 +126,7 @@ var onDrop = function(source, target) {
   if (move === null) return 'snapback';
 
   // Send a message to update the other player's board
+  movement['gameid'] = gameid;
   socket.emit('move', JSON.stringify(movement));
   updateMoves();
   playerHelper();

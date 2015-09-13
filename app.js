@@ -43,10 +43,13 @@ app.get('/game', function(req, res) {
   // Socketio room will be the gameid
   socket.on('connection', function(client) {
     client.join(gameid);
-    console.log('player joined ' + gameid);
+    console.log('white joined ' + gameid);
   });
 
-  res.render('game', {gamelink: gameurl});
+  res.render('game', {
+    gamelink: gameurl,
+    gameid: gameid
+  });
 });
 
 /**
@@ -59,25 +62,31 @@ app.get('/game/:gameid', function(req, res) {
 
   socket.on('connection', function(client) {
     client.join(req.params.gameid);
-    console.log('player joined ' + req.params.gameid);
+    console.log('black joined ' + req.params.gameid);
+
+    // Inform the first player as to what color they are.
+    client.broadcast.to(req.params.gameid).emit('color', {color:'white'});
+
   });
 
-  res.render('game', {gamelink: gameurl});
+  res.render('game', {
+    gamelink: gameurl,
+    gameid: req.params.gameid
+  });
 });
 
 /***************************************************************************
  * Handle socket events to sync game states between players
  **************************************************************************/
 
-// TODO
+socket.on('connection', function(client) {
+  client.on('move', function(arg) {
+    console.log(arg);
+    var move = JSON.parse(arg);
+    client.broadcast.to(move.gameid).emit('move', arg);
+  });
+});
 
- socket.on('connection', function(client) {
-   console.log('socket connected!');
-   client.on('move', function(arg) {
-     console.log('move: ' + arg);
-   });
- });
- 
 /***************************************************************************
  * Initialization
  **************************************************************************/
