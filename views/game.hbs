@@ -13,7 +13,7 @@
     <div class="center">
       <p>
         <b>GameLink:</b>
-        <span id="gameid">/game</span>
+        <span id="gameid">{{ gamelink }}</span>
       </p>
       <h5>Moves</h5>
       <div class="move-history-box">
@@ -28,6 +28,6 @@
 
 {{#contentFor "pageScripts"}}
   <script src="/socket.io/socket.io.js"></script>
-  <script src="js/chess.js"></script>
-  <script src="js/socketchess.js"></script>
+  <script src="/js/chess.js"></script>
+  <script src="/js/socketchess.js"></script>
 {{/contentFor}}

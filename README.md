@@ -31,6 +31,7 @@ If you run into problems installing socket.io on Windows, read [this](http://sta
 # Future Improvement
 
 * CSS Styling. Divs overlap when the browser window size is reduced.
+* Move routing logic into new directory and files.
 
 # License
 
