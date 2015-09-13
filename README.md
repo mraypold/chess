@@ -1,6 +1,6 @@
 # Chess With SocketIO
 
-Currently under development as of September 10, 2015. SocketIO integration comming soon.
+Currently under development as of September 13, 2015. SocketIO integration comming soon.
 
 # About
 
