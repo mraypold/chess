@@ -33,8 +33,7 @@ app.get('/', function(req, res) {
 });
 
 /**
- * When user creates a new game, create a game id (socketio room), set the
- * player's color and notify them.
+ * When user creates a new game, create a game id (socketio room).
  */
 app.get('/game', function(req, res) {
   var gameid = uuid.v4();
