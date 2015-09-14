@@ -19,7 +19,6 @@
   "devDependencies": {
     "bower": "^1.5.2",
     "del": "^2.0.2",
-    "express": "^4.13.3",
     "gulp": "^3.9.0",
     "gulp-express": "^0.3.5"
   },
