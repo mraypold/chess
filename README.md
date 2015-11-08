@@ -1,6 +1,6 @@
 # Chess With SocketIO
 
-Currently under development as of September 13, 2015. SocketIO integration comming soon.
+No longer under development as of November 2015. This was a good introduction to Node, Express, and SocketIO, but I have moved on to other projects.
 
 # About
 
